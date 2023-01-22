@@ -62,13 +62,15 @@ function renderCountrys(countries) {
         .join("");
         countryInfo.innerHTML = markup;
         countryList.innerHTML = "";
+        countryInfo.style.paddingTop = "0";
+        let h1 = document.querySelector("h1");
+        h1.style.marginTop = "0";
     }
 }
 
 // Style ---
 countryList.style.listStyleType = "none";
-//countryList.style.border = "1px solid red";
 countryList.style.padding = "0";
-countryList.style.marginTop = "0";
+countryList.style.margin = "0";
 
 
