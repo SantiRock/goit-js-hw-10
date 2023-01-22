@@ -19,7 +19,9 @@ input.addEventListener("input",
             else {
                 fetchCountries(trim)
                 .then((country) => renderCountrys(country))
-                .catch((error) => Notiflix.Notify.failure("Oops, there is no country with that name"));
+                .catch((error) => Notiflix.Notify.failure("Oops, there is no country with that name"),
+                                countryList.innerHTML = "",
+                                countryInfo.innerHTML = "");
                 }
          }, DEBOUNCE_DELAY )
 );
@@ -30,19 +32,29 @@ function renderCountrys(countries) {
     } else if (countries.length > 1) {
         const markup = countries
         .map((country) => {
-        return `<li><img src="${country.flags.svg}" alt="${country.name.official}" width="30">
+        return `<li><img src="${country.flags.svg}" alt="${country.name.official}" width="25">
         ${country.name.official}</li>`;
         })
         .join("");
         countryList.innerHTML = markup;
         countryInfo.innerHTML = "";
+        let lis = document.querySelectorAll("li");
+        lis.forEach(li => {
+            li.style.marginBottom = "9px";
+            li.style.display = "flex";
+            li.style.alignContent = "center";
+        });
+        let imgs = document.querySelectorAll("img");
+        imgs.forEach(img => {
+            img.style.marginRight = "10px";
+        })
+
     } else {
         const markup = countries
         .map((country) => {
             let languages = Object.values(country.languages).join(", ");
-
-            return `<h2><img src="${country.flags.svg}" alt="${country.name.official}" width="30">
-            ${country.name.official}</h2>
+            return `<h1><img src="${country.flags.svg}" alt="${country.name.official}" width="30">
+            ${country.name.official}</h1>
             <p><b>Capital:</b> ${country.capital}<p>
             <p><b>Population:</b> ${country.population}<p>
             <p><b>Languages:</b> ${languages}</p>`;
@@ -53,4 +65,10 @@ function renderCountrys(countries) {
     }
 }
 
-console.log();
+// Style ---
+countryList.style.listStyleType = "none";
+//countryList.style.border = "1px solid red";
+countryList.style.padding = "0";
+countryList.style.marginTop = "0";
+
+
